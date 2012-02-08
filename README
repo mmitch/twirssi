@@ -4,6 +4,7 @@ You may need to use CPAN or another method to install these modules.
     * Net::Twitter
     * DateTime
     * DateTime::Format::Strptime
+    * JSON::Any
 
 ### Installation ###
 Installation is two part. First 
