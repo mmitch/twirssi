@@ -1,10 +1,11 @@
 <h3>Getting Started</h3>
 <ul>
   <li>Load the script in irssi: <code>/script load twirssi.pl</code></li>
-  <li>Log in to twitter: <code>/twitter_login username password</code>.  To use
+  <li>Log in to twitter: <code>/twitter_login username</code>.  To use
       an account on <a href="http://identi.ca/">identi.ca</a>, just append
       @identica to the user name, and make sure <code>Net::Identica</code> is
-      installed.</li>
+      installed. If you want twirssi to automatically log in on startup, edit
+      the <code>twitter_usernames</code> setting.</li>
   <li>Post updates: <code>/tweet I got #twirssi working!</code></li>
   <li>Every 5 minutes, new updates from twitter will be posted to the named
       window.  To manually poll, you can always type <code>/twitter_updates</code>,
@@ -132,9 +133,6 @@ current value, <code>/set bitlbee_server bitlbee_tag</code> will set it to
 <h3>Look-and-feel Settings</h3>
 <ul>
   <li><code>show_own_tweets</code> - Should our own tweets be displayed?  Defaults to on.</li>
-  <li><code>show_reply_context</code> - When set to on, and someone you follow is replying
-      to someone you are not, the tweet that generated the reply will be pulled and
-      shown.  Defaults to off.</li>
   <li><code>tweet_to_away</code> - Set to on to post non-@reply updates as your away message</li>
   <li><code>tweet_window_input</code> - Enable tweeting directly by writing to
       the twitter window.  Off by default</li>
