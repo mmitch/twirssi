@@ -17,7 +17,7 @@ $Data::Dumper::Indent = 1;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = sprintf '%s', q$Version: v2.5.2beta4$ =~ /^\w+:\s+v(\S+)/;
+$VERSION = sprintf '%s', q$Version: v2.5.2beta5$ =~ /^\w+:\s+v(\S+)/;
 %IRSSI   = (
     authors     => 'Dan Boger',
     contact     => 'zigdon@gmail.com',
@@ -26,7 +26,7 @@ $VERSION = sprintf '%s', q$Version: v2.5.2beta4$ =~ /^\w+:\s+v(\S+)/;
       . 'Can optionally set your bitlbee /away message to same',
     license => 'GNU GPL v2',
     url     => 'http://twirssi.com',
-    changed => '$Date: 2012-02-14 14:32:59 +0000$',
+    changed => '$Date: 2012-03-13 21:04:44 +0000$',
 );
 
 my $twit;	# $twit is current logged-in Net::Twitter object (usually one of %twits)
@@ -3573,14 +3573,12 @@ sub get_text {
     my $tweet  = shift;
     my $object = shift;
     my $text   = decode_entities( $tweet->{text} );
-    if ( $tweet->{truncated} ) {
-        if ( exists $tweet->{retweeted_status} ) {
-            $text = "RT \@$tweet->{retweeted_status}{user}{screen_name}: "
-              . "$tweet->{retweeted_status}{text}";
-        } elsif ( $object->isa('Net::Twitter') ) {
-            $text .= " -- http://twitter.com/$tweet->{user}{screen_name}"
-              . "/status/$tweet->{id}";
-        }
+    if ( exists $tweet->{retweeted_status} ) {
+        $text = "RT \@$tweet->{retweeted_status}{user}{screen_name}: "
+          . "$tweet->{retweeted_status}{text}";
+    } elsif ( $tweet->{truncated} and $object->isa('Net::Twitter') ) {
+        $text .= " -- http://twitter.com/$tweet->{user}{screen_name}"
+          . "/status/$tweet->{id}";
     }
 
     $text =~ s/[\n\r]/ /g;
