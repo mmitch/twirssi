@@ -2488,29 +2488,6 @@ sub encode_for_file {
     return $datum;
 }
 
-sub date_to_epoch {
-    # parse created_at style date to epoch time
-    my $date = shift;
-    if (not @datetime_parser) {
-	foreach my $date_fmt (
-			'%a %b %d %T %z %Y',	# Fri Nov 05 10:14:05 +0000 2010
-			'%a, %d %b %Y %T %z',	# Fri, 05 Nov 2010 16:59:40 +0000
-		) {
-            my $parser = DateTime::Format::Strptime->new(pattern => $date_fmt);
-            if (not defined $parser) {
-                @datetime_parser = ();
-                return;
-            }
-            push @datetime_parser, $parser;
-        }
-    }
-    # my $orig_date = $date;
-    $date = $datetime_parser[index($date, ',') == -1 ? 0 : 1]->parse_datetime($date);
-    # print "date '$orig_date': " . ref($date) if &debug;
-    return if not defined $date;
-    return $date->epoch();
-}
-
 sub monitor_child {
     my $args = shift;
 
