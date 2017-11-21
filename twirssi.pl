@@ -2482,12 +2482,6 @@ sub cache_to_meta {
     return %meta;
 }
 
-sub encode_for_file {
-    my $datum = shift;
-    $datum =~ s/ /%20/g;
-    return $datum;
-}
-
 sub monitor_child {
     my $args = shift;
 
